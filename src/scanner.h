@@ -1,0 +1,35 @@
+#ifndef CBLANGVM_SCANNER_H
+#define CBLANGVM_SCANNER_H
+
+typedef enum {
+    // Single character
+    LEFT_PAREN, RIGHT_PAREN, LEFT_BRACKET, RIGHT_BRACKET, LEFT_CURLY, RIGHT_CURLY, LEFT_ANGLE, RIGHT_ANGLE,
+    COMMA, DOT, MINUS, PLUS, SLASH, STAR, SEMICOLON, COLON,
+    BANG, EQUAL, CARET, MODULO, PIPE,
+
+    // Two character
+    BANG_EQUAL, EQUAL_EQUAL, GREATER_EQUAL, LESS_EQUAL, STAR_STAR, RETURN,
+    PLUS_EQUAL, MINUS_EQUAL, STAR_EQUAL, SLASH_EQUAL, CARET_EQUAL, STAR_STAR_EQUAL, MODULO_EQUAL, PIPE_EQUAL,
+    PIPE_PIPE, AND_AND, 
+
+    // Literals
+    IDENTIFIER, STRING, FLOAT, INT, CHARACTER,
+
+    // Keywords
+    CAST_KW, CLASS_KW, CONTINUE_KW, CONST_KW, TRUE_KW, FALSE_KW, FOR_KW, PRIVATE_KW, STATIC_KW, SCOPE_KW, SUPER_KW, OPERATOR_KW, 
+    RETURN_KW, IF_KW, IN_KW, ELIF_KW, ELSE_KW, WHILE_KW, BREAK_KW,
+    
+    ERROR_TOKEN, EOF_TOKEN
+} TokenType;
+
+typedef struct {
+    TokenType type;
+    const char* start;
+    int length;
+    int line;
+} Token;
+
+void init_scanner(const char* source);
+Token scan_token(void);
+
+#endif // CBLANGVM_SCANNER_H
